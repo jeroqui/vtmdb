@@ -21,7 +21,15 @@ class CharacterAdmin(admin.ModelAdmin):
     inlines = [RelationshipsInline, HumanCCInline, VampireCCInline]
 
 
+
+class PlotStageInline(admin.StackedInline):
+    model = PlotStages
+
+class PlotAdmin(admin.ModelAdmin):
+    inlines = [PlotStageInline]
+
 admin.site.register(Chronicle)
 admin.site.register(VampireClan)
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Location)
+admin.site.register(Plot, PlotAdmin)
