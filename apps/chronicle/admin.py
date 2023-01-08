@@ -17,6 +17,7 @@ class HumanCCInline(admin.StackedInline):
 
 class CharacterAdmin(admin.ModelAdmin):
     list_display = ["name", "pc"]
+    list_filter = ["pc"]
     inlines = [RelationshipsInline, HumanCCInline, VampireCCInline]
 
 

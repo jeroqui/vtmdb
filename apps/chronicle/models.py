@@ -19,6 +19,8 @@ class ChronicleData(models.Model):
 
 class Character(ChronicleData):
     name = models.CharField(max_length=25)
+
+    story = models.TextField(null=True, blank=True)
     
     pc = models.BooleanField()
 
@@ -64,10 +66,22 @@ class VampireCC(CharacterComponent):
     clan = models.ForeignKey(VampireClan, on_delete=models.CASCADE)
     sire = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, blank=True, default=None, related_name='vampire_sire')
 
+    title = models.CharField(max_length=50, null=True, blank=True)
+
     embrace_date = models.DateTimeField(null=True, blank=True)
 
 class HumanCC(CharacterComponent):
     birth_date = models.DateTimeField()
+
+
+class Plot(ChronicleData):
+    name = models.CharField(max_length=25)
+    description = models.TextField()
+
+
+class PlotStages(models.Model):
+    plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
+    description = models.TextField()
 
 
 class Location(ChronicleData):
