@@ -7,6 +7,9 @@ class Chronicle(models.Model):
 
     current_date = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 
 class ChronicleData(models.Model):
     chronicle = models.ForeignKey(Chronicle, on_delete=models.CASCADE)
@@ -20,6 +23,9 @@ class Character(ChronicleData):
     pc = models.BooleanField()
 
     relationships = models.ManyToManyField('Character', through='CharacterRelationship')
+
+    def __str__(self):
+        return self.name
 
 
 class CharacterRelationship(models.Model):
@@ -51,9 +57,12 @@ class CharacterComponent(models.Model):
 class VampireClan(models.Model):
     name = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.name
+
 class VampireCC(CharacterComponent):
     clan = models.ForeignKey(VampireClan, on_delete=models.CASCADE)
-    sire = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, related_name='vampire_sire')
+    sire = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, blank=True, default=None, related_name='vampire_sire')
 
     embrace_date = models.DateTimeField()
 

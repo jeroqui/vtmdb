@@ -8,21 +8,19 @@ class RelationshipsInline(admin.TabularInline):
     fk_name = "character1"
 
 
-class VampireCCInline(admin.TabularInline):
+class VampireCCInline(admin.StackedInline):
     model = VampireCC
     fk_name = "character"
 
-class HumanCCInline(admin.TabularInline):
+class HumanCCInline(admin.StackedInline):
     model = HumanCC
 
-
-class VampireClanAdmin(admin.ModelAdmin):
-    exclude = ()
-
 class CharacterAdmin(admin.ModelAdmin):
+    list_display = ["name", "pc"]
     inlines = [RelationshipsInline, HumanCCInline, VampireCCInline]
 
 
 admin.site.register(Chronicle)
+admin.site.register(VampireClan)
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Location)
