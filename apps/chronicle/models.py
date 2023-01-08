@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -85,6 +86,18 @@ class Plot(ChronicleData):
 class PlotStages(models.Model):
     plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
     description = models.TextField()
+
+
+
+
+class Sesion(ChronicleData):
+    title = models.CharField(max_length=25)
+
+    date = models.DateTimeField(default=datetime.now)
+
+class Event(models.Model):
+    sesion = models.ForeignKey(Sesion, on_delete=models.CASCADE)
+    text = models.TextField()
 
 
 class Location(ChronicleData):

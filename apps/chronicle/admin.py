@@ -28,8 +28,18 @@ class PlotStageInline(admin.StackedInline):
 class PlotAdmin(admin.ModelAdmin):
     inlines = [PlotStageInline]
 
+
+
+class EventInline(admin.StackedInline):
+    model = Event
+
+class SesionAdmin(admin.ModelAdmin):
+    inlines = [EventInline]
+
+
 admin.site.register(Chronicle)
 admin.site.register(VampireClan)
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Location)
 admin.site.register(Plot, PlotAdmin)
+admin.site.register(Sesion, SesionAdmin)
