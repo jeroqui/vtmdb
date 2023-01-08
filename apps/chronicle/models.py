@@ -7,7 +7,14 @@ class Chronicle(models.Model):
 
     current_date = models.DateField()
 
-class Character(models.Model):
+
+class ChronicleData(models.Model):
+    chronicle = models.ForeignKey(Chronicle, on_delete=models.CASCADE)
+
+    class Meta:
+        abstract = True
+
+class Character(ChronicleData):
     name = models.CharField(max_length=25)
     
     pc = models.BooleanField()
@@ -54,5 +61,5 @@ class HumanCC(CharacterComponent):
     birth_date = models.DateTimeField()
 
 
-class Location(models.Model):
+class Location(ChronicleData):
     name = models.CharField(max_length=25)
