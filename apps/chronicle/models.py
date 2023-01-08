@@ -78,6 +78,9 @@ class Plot(ChronicleData):
     name = models.CharField(max_length=25)
     description = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class PlotStages(models.Model):
     plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
