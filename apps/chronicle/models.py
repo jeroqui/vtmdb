@@ -64,7 +64,7 @@ class VampireCC(CharacterComponent):
     clan = models.ForeignKey(VampireClan, on_delete=models.CASCADE)
     sire = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, blank=True, default=None, related_name='vampire_sire')
 
-    embrace_date = models.DateTimeField()
+    embrace_date = models.DateTimeField(null=True, blank=True)
 
 class HumanCC(CharacterComponent):
     birth_date = models.DateTimeField()
