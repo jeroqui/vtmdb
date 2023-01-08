@@ -19,8 +19,8 @@ class CharacterRelationship(models.Model):
     class Meta:
         unique_together = (('character1', 'character2'),)
 
-    character1 = models.ForeignKey(Character, on_delete=models.CASCADE)
-    character2 = models.ForeignKey(Character, on_delete=models.CASCADE)
+    character1 = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='relationship_character1')
+    character2 = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='relationship_character2')
 
     FEELING_CHOICES = [
         ('Love', (
@@ -38,15 +38,15 @@ class CharacterComponent(models.Model):
     character = models.OneToOneField(Character, on_delete=models.CASCADE)
 
     class Meta:
-        abstract = Trues
+        abstract = True
 
 
 class VampireClan(models.Model):
     name = models.CharField(max_length=10)
 
 class VampireCC(CharacterComponent):
-    clan = models.ForeignKey(VampireClan)
-    sire = models.ForeignKey(Character)
+    clan = models.ForeignKey(VampireClan, on_delete=models.CASCADE)
+    sire = models.ForeignKey(Character, on_delete=models.SET_NULL, null=True, related_name='vampire_sire')
 
     embrace_date = models.DateTimeField()
 
